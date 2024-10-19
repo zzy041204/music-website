@@ -1,6 +1,8 @@
 import { getCurrentInstance, ref } from "vue";
-import { LocationQueryRaw } from "vue-router";
+import { LocationQueryRaw, useRouter, useRoute } from "vue-router"; // 引入 useRouter 和 useRoute
 import { RouterName } from "@/enums";
+import { ElMessage } from "element-plus"; // 引入 ElMessage
+import { useStore } from "vuex"; // 引入 Vuex
 
 interface routerOptions {
   path?: string;
@@ -8,8 +10,10 @@ interface routerOptions {
 }
 
 export default function () {
-  const { proxy } = getCurrentInstance();
+  const store = useStore(); // 使用 Vuex 的 store
   const uploadTypes = ref(["jpg", "jpeg", "png", "gif"]);
+  const router = useRouter(); // 使用 useRouter
+  const route = useRoute(); // 使用 useRoute
 
   function changeSex(value) {
     if (value === 0) {
@@ -31,29 +35,25 @@ export default function () {
     const isExistFileType = uploadTypes.value.includes(file.type.replace(/image\//, ""));
 
     if (!isExistFileType) {
-      (proxy as any).$message.error(`图片只支持 ${uploadTypes.value.join("、")} 格式!`);
+      ElMessage.error(`图片只支持 ${uploadTypes.value.join("、")} 格式!`); // 直接调用 ElMessage.error
     }
     if (!isLt2M) {
-      (proxy as any).$message.error(`上传头像图片大小不能超过 ${ltCode}MB!`);
+      ElMessage.error(`上传头像图片大小不能超过 ${ltCode}MB!`); // 直接调用 ElMessage.error
     }
-    
+
     return isExistFileType && isLt2M;
   }
 
   function beforeSongUpload(file) {
     const ltCode = 10;
     const isLt10M = file.size / 1024 / 1024 < ltCode;
-    const testmsg = file.name.substring(file.name.lastIndexOf(".") + 1);
-    const extension = testmsg === "mp3";
+    const extension = file.name.endsWith(".mp3");
 
     if (!extension) {
-      (proxy as any).$message({
-        message: "上传文件只能是mp3格式！",
-        type: "error",
-      });
+      ElMessage.error("上传文件只能是mp3格式！"); // 直接调用 ElMessage.error
     }
     if (!isLt10M) {
-      (proxy as any).$message.error(`上传头像图片大小不能超过 ${ltCode}MB!`);
+      ElMessage.error(`上传文件大小不能超过 ${ltCode}MB!`); // 直接调用 ElMessage.error
     }
 
     return extension && isLt10M;
@@ -67,7 +67,7 @@ export default function () {
       case RouterName.Comment:
       case RouterName.Consumer:
       case RouterName.Collect:
-        proxy.$router.push({ path: options.path, query: options.query });
+        router.push({ path: options.path, query: options.query }); // 修改位置
         break;
       case RouterName.Home:
       case RouterName.SignIn:
@@ -77,13 +77,13 @@ export default function () {
       case RouterName.SongList:
       case RouterName.Error:
       default:
-        proxy.$router.push({ path: options.path });
+        router.push({ path: options.path }); // 修改位置
         break;
     }
   }
 
   function goBack(step = -1) {
-    proxy.$router.go(step);
+    router.go(step); // 修改位置
   }
 
   return { changeSex, routerManager, goBack, beforeImgUpload, beforeSongUpload };

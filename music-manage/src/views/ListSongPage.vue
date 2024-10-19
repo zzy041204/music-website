@@ -48,6 +48,7 @@
 <script lang="ts">
 import { defineComponent, getCurrentInstance, watch, ref, reactive, computed } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router"; // 导入 useRoute
 import { HttpManager } from "@/api";
 import YinDelDialog from "@/components/dialog/YinDelDialog.vue";
 
@@ -56,8 +57,8 @@ export default defineComponent({
     YinDelDialog,
   },
   setup() {
-    const { proxy } = getCurrentInstance();
     const store = useStore();
+    const route = useRoute(); // 使用 useRoute 获取路由信息
 
     const tableData = ref([]); // 记录歌曲，用于显示
     const tempDate = ref([]); // 记录歌曲，用于搜索时能临时记录一份歌曲列表
@@ -83,11 +84,11 @@ export default defineComponent({
     async function getData() {
       tableData.value = [];
       tempDate.value = [];
-      const result = (await HttpManager.getListSongOfSongId(proxy.$route.query.id)) as ResponseBody;
+      const result = (await HttpManager.getListSongOfSongId(route.query.id)) as ResponseBody; // 使用 route.query.id
       for (let item of result.data) {
-        const result = await HttpManager.getSongOfId(item.songId) as ResponseBody;
-        tableData.value.push(result.data[0]);
-        tempDate.value.push(result.data[0]);
+        const songResult = await HttpManager.getSongOfId(item.songId) as ResponseBody;
+        tableData.value.push(songResult.data[0]);
+        tempDate.value.push(songResult.data[0]);
       }
     }
 
@@ -107,25 +108,26 @@ export default defineComponent({
 
       if (result.success) {
         addSong(result.data[0].id);
-      }else{
+      } else {
         alert(result.message);
         centerDialogVisible.value = false;
       }
     }
+
     async function addSong(id) {
       let songId = id;
-      let songListId = proxy.$route.query.id as string;
+      let songListId = route.query.id as string; // 使用 route.query.id
 
-      const result = (await HttpManager.setListSong({songId,songListId})) as ResponseBody;
-      (proxy as any).$message({
+      const result = (await HttpManager.setListSong({ songId, songListId })) as ResponseBody;
+      (getCurrentInstance().proxy as any).$message({ // 保留原有方式调用 $message
         message: result.message,
         type: result.type,
       });
 
       if (result.success) {
-         getData();
+        getData();
       }
-      
+
       centerDialogVisible.value = false;
     }
 
@@ -138,7 +140,7 @@ export default defineComponent({
 
     async function confirm() {
       const result = await HttpManager.deleteListSong(idx.value) as ResponseBody;
-      (proxy as any).$message({
+      (getCurrentInstance().proxy as any).$message({ // 保留原有方式调用 $message
         message: result.message,
         type: result.type,
       });
@@ -146,13 +148,16 @@ export default defineComponent({
       if (result.success) getData();
       delVisible.value = false;
     }
+
     function deleteRow(id) {
       idx.value = id;
       delVisible.value = true;
     }
+
     function handleSelectionChange(val) {
       multipleSelection.value = val;
     }
+
     function deleteAll() {
       for (let item of multipleSelection.value) {
         deleteRow(item.id);

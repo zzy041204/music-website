@@ -1,45 +1,18 @@
-<template>
-  <el-breadcrumb class="crumbs" separator="/">
-    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.name" :to="{ path: item.path, query: item.query }">
-      {{ item.name }}
-    </el-breadcrumb-item>
-  </el-breadcrumb>
-
-  <div class="container">
-    <div class="handle-box">
-      <el-button @click="deleteAll">批量删除</el-button>
-      <el-input v-model="searchWord" placeholder="筛选关键词"></el-input>
-    </div>
-    <el-table height="550px" border size="small" :data="tableData" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="40" align="center"></el-table-column>
-      <el-table-column prop="id" label="ID" width="50"></el-table-column>
-      <el-table-column prop="username" label="用户" width="80"></el-table-column>
-      <el-table-column prop="content" label="评论内容"></el-table-column>
-      <el-table-column label="操作" width="100" align="center">
-        <template v-slot="scope">
-          <el-button type="danger" @click="deleteRow(scope.row.id)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
-
-  <!-- 删除提示框 -->
-  <yin-del-dialog :delVisible="delVisible" @confirm="confirm" @cancelRow="delVisible = $event"></yin-del-dialog>
-</template>
-
 <script lang="ts">
-import { defineComponent, getCurrentInstance, watch, ref, computed } from "vue";
+import { defineComponent, watch, ref, computed } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";  // 导入 useRoute
 import { HttpManager } from "@/api";
 import YinDelDialog from "@/components/dialog/YinDelDialog.vue";
+import { getCurrentInstance } from "vue"; // 确保导入 getCurrentInstance
 
 export default defineComponent({
   components: {
     YinDelDialog,
   },
   setup() {
-    const { proxy } = getCurrentInstance();
     const store = useStore();
+    const route = useRoute();  // 使用 useRoute 获取路由对象
 
     const tableData = ref([]); // 记录歌曲，用于显示
     const tempDate = ref([]); // 记录歌曲，用于搜索时能临时记录一份歌曲列表
@@ -62,22 +35,27 @@ export default defineComponent({
     getData();
 
     // 获取评论
-    function getData() {
+    async function getData() {
       tableData.value = [];
       tempDate.value = [];
       let promise = null;
-      if (proxy.$route.query.type == "0") {
-        promise = HttpManager.getCommentOfSongId(proxy.$route.query.id);
-      } else if (proxy.$route.query.type == "1") {
-        promise = HttpManager.getCommentOfSongListId(proxy.$route.query.id);
+
+      // 直接使用 route.query
+      if (route.query.type == "0") {
+        promise = HttpManager.getCommentOfSongId(route.query.id);
+      } else if (route.query.type == "1") {
+        promise = HttpManager.getCommentOfSongListId(route.query.id);
       }
 
-      promise.then((res) => {
+      // 确保 promise 被解析
+      if (promise) {
+        const res = await promise;
         for (let item of (res as ResponseBody).data) {
           getUsers(item.userId, item);
         }
-      });
+      }
     }
+
     async function getUsers(id, item) {
       const result = (await HttpManager.getUserOfId(id)) as ResponseBody;
       item.username = result.data[0].username;
@@ -94,7 +72,12 @@ export default defineComponent({
 
     async function confirm() {
       const result = (await HttpManager.deleteComment(idx.value)) as ResponseBody;
-      (proxy as any).$message({
+
+      // 使用 getCurrentInstance 来获取当前实例并调用 $message
+      const { appContext } = getCurrentInstance(); // 获取应用上下文
+      const message = appContext.config.globalProperties.$message; // 访问全局属性中的 $message
+
+      message({
         message: result.message,
         type: result.type,
       });
@@ -102,13 +85,16 @@ export default defineComponent({
       if (result.success) getData();
       delVisible.value = false;
     }
+
     function deleteRow(id) {
       idx.value = id;
       delVisible.value = true;
     }
+
     function handleSelectionChange(val) {
       multipleSelection.value = val;
     }
+
     function deleteAll() {
       for (let item of multipleSelection.value) {
         deleteRow(item.id);
@@ -130,5 +116,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped></style>

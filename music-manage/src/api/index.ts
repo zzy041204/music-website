@@ -75,7 +75,7 @@ const HttpManager = {
     deleteSong: (id) => deletes(`song/delete?id=${id}`),
 
     // =======================> 歌单 API 完成
-    // 添加歌单
+    // 添加歌单t
     setSongList: ({title, introduction, style}) => post(`songList/add`, {title, introduction, style}),
     // 获取全部歌单
     getSongList: () => get(`songList`),
