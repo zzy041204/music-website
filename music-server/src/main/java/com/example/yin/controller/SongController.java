@@ -57,12 +57,7 @@ public class SongController {
      */
     @GetMapping("detail")
     public R getSongOfId(@RequestParam("id") Integer id){
-        List<Song> list = songService.getCollectSongsByUserId(id);
-        if(list != null && list.size() > 0){
-            return R.success("返回的指定用户收藏列表成功",list);
-        }else {
-            return R.warning("该用户收藏列表为空");
-        }
+        return songService.getCollectSongsByUserId(id);
     }
 
     /**
@@ -70,12 +65,7 @@ public class SongController {
      */
     @GetMapping("/singerName/detail")
     public R getSongOfSingerName(@RequestParam("name") String name){
-        List<Song> songs = songService.getSongOfSingerName(name);
-        if(songs != null && songs.size() > 0){
-            return R.success("根据歌手名查询歌曲成功",songs);
-        }else {
-            return R.warning("根据用户名未查询到歌曲");
-        }
+        return songService.getSongOfSingerName(name);
     }
 
     /**

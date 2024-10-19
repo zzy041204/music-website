@@ -5,8 +5,6 @@ import com.example.yin.domain.Song;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 /**
  * <p>
  *  服务类
@@ -17,9 +15,9 @@ import java.util.List;
  */
 public interface SongService extends IService<Song> {
 
-    List<Song> getCollectSongsByUserId(Integer id);
+    R getCollectSongsByUserId(Integer id);
 
-    List<Song> getSongOfSingerName(String name);
+    R getSongOfSingerName(String name);
 
     R updateSongPic(MultipartFile urlFile, int id);
 

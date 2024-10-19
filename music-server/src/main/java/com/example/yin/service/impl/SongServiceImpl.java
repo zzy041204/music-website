@@ -12,7 +12,6 @@ import com.example.yin.service.SingerService;
 import com.example.yin.service.SongService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
 import io.minio.RemoveObjectArgs;
 import io.minio.errors.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,27 +54,31 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
 
 
     @Override
-    public List<Song> getCollectSongsByUserId(Integer id) {
+    public R getCollectSongsByUserId(Integer id) {
         // 根据用户id找到收藏列表的所有歌曲id
         List<Collect> collects = collectService.list(new QueryWrapper<Collect>().eq("user_id", id));
         List<Integer> songIds = collects.stream().map(c -> c.getSongId()).collect(Collectors.toList());
         if (songIds.size() > 0 && songIds != null) {
             List<Song> songs = this.listByIds(songIds);
-            return songs;
+            return R.success("返回的指定用户收藏列表成功",songs);
         }else {
-            return Collections.emptyList();
+            return R.warning("该用户收藏列表为空");
         }
     }
 
     @Override
-    public List<Song> getSongOfSingerName(String name) {
+    public R getSongOfSingerName(String name) {
         List<Singer> singers = singerService.list(new QueryWrapper<Singer>().like("name", name));
         List<Integer> singerIds = singers.stream().map(s -> s.getId()).collect(Collectors.toList());
         if (singerIds.size() > 0 && singerIds != null) {
             List<Song> songs = this.list(new QueryWrapper<Song>().in("singer_id", singerIds));
-            return songs;
+            if (songs.size() > 0 && songs != null) {
+                return R.success("根据歌手名查询歌曲成功",songs);
+            }else {
+                return R.warning("根据歌手名未查询到歌曲");
+            }
         }else {
-            return Collections.emptyList();
+            return R.warning("根据歌手名未查询到歌曲");
         }
     }
 

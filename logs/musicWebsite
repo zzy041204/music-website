@@ -2641,3 +2641,28 @@ Consider defining a bean of type 'com.example.yin.service.ListSongService' in yo
 2024-10-19 15:19:44 INFO [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]: Tomcat started on port(s): 8888 (http) with context path ''
 2024-10-19 15:19:44 INFO [com.example.yin.MusicServerApplication]: Started MusicServerApplication in 1.561 seconds (JVM running for 17231.332)
 2024-10-19 15:19:44 INFO [org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener]: Condition evaluation unchanged
+2024-10-19 15:22:14 INFO [com.example.yin.MusicServerApplication]: Starting MusicServerApplication using Java 1.8.0_171 on zzy with PID 23840 (D:\study\music-website\music-server\target\classes started by zzy in D:\study\music-website)
+2024-10-19 15:22:14 INFO [com.example.yin.MusicServerApplication]: No active profile set, falling back to default profiles: default
+2024-10-19 15:22:14 INFO [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]: Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-10-19 15:22:14 INFO [org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor]: For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-10-19 15:22:14 INFO [org.springframework.data.repository.config.RepositoryConfigurationDelegate]: Multiple Spring Data modules found, entering strict repository configuration mode!
+2024-10-19 15:22:14 INFO [org.springframework.data.repository.config.RepositoryConfigurationDelegate]: Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-10-19 15:22:14 INFO [org.springframework.data.repository.config.RepositoryConfigurationDelegate]: Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2024-10-19 15:22:15 INFO [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]: Tomcat initialized with port(s): 8888 (http)
+2024-10-19 15:22:15 INFO [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext]: Root WebApplicationContext: initialization completed in 1214 ms
+2024-10-19 15:22:18 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]: Autowired annotation is not supported on static fields: public static java.lang.String com.example.yin.controller.MinioUploadController.bucketName
+2024-10-19 15:22:18 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]: Autowired annotation is not supported on static fields: private static java.lang.String com.example.yin.controller.MinioUploadController.endpoint
+2024-10-19 15:22:18 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]: Autowired annotation is not supported on static fields: private static java.lang.String com.example.yin.controller.MinioUploadController.accessKey
+2024-10-19 15:22:18 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]: Autowired annotation is not supported on static fields: private static java.lang.String com.example.yin.controller.MinioUploadController.secretKey
+2024-10-19 15:22:18 INFO [org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping]: Adding welcome page: class path resource [static/index.html]
+2024-10-19 15:22:19 INFO [org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer]: LiveReload server is running on port 35729
+2024-10-19 15:22:19 INFO [org.springframework.boot.web.embedded.tomcat.TomcatWebServer]: Tomcat started on port(s): 8888 (http) with context path ''
+2024-10-19 15:22:19 INFO [com.example.yin.MusicServerApplication]: Started MusicServerApplication in 5.166 seconds (JVM running for 6.978)
+2024-10-19 15:24:20 INFO [org.springframework.web.servlet.DispatcherServlet]: Initializing Servlet 'dispatcherServlet'
+2024-10-19 15:24:20 INFO [org.springframework.web.servlet.DispatcherServlet]: Completed initialization in 1 ms
+2024-10-19 15:24:28 INFO [com.zaxxer.hikari.HikariDataSource]: HikariPool-1 - Starting...
+2024-10-19 15:24:28 INFO [com.zaxxer.hikari.HikariDataSource]: HikariPool-1 - Start completed.
+2024-10-19 15:28:11 WARN [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver]: Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'songId' for method parameter type Integer is not present]
+2024-10-19 15:29:43 WARN [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver]: Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'songId' for method parameter type Integer is not present]
+2024-10-19 15:42:20 INFO [com.zaxxer.hikari.HikariDataSource]: HikariPool-1 - Shutdown initiated...
+2024-10-19 15:42:20 INFO [com.zaxxer.hikari.HikariDataSource]: HikariPool-1 - Shutdown completed.
