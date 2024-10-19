@@ -1,10 +1,11 @@
-package com.example.yin.controller;
+package com.example.yin.utils;
 
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.errors.MinioException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -12,8 +13,9 @@ import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-@Service
-public class MinioUploadController {
+@Component
+@Slf4j
+public class MinioUploadUtil {
 
 
     @Value("${minio.bucket-name}")

@@ -2,7 +2,7 @@ package com.example.yin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.yin.common.R;
-import com.example.yin.controller.MinioUploadController;
+import com.example.yin.utils.MinioUploadUtil;
 import com.example.yin.domain.Collect;
 import com.example.yin.domain.Singer;
 import com.example.yin.domain.Song;
@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,7 +86,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
     public R updateSongPic(MultipartFile urlFile, int id) {
         String fileName =  urlFile.getOriginalFilename();
         String storeUrlPath = "/user01/singer/song/" + fileName;
-        MinioUploadController.uploadSongImgFile(urlFile);
+        MinioUploadUtil.uploadSongImgFile(urlFile);
         Song song = new Song();
         song.setId(id);
         song.setPic(storeUrlPath);
@@ -136,7 +135,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
 
         //上传新文件
         fileName = urlFile.getOriginalFilename();
-        String s = MinioUploadController.uploadFile(urlFile);
+        String s = MinioUploadUtil.uploadFile(urlFile);
         String storeUrlPath = "/"+bucketName+"/" + fileName;
         song.setId(id);
         song.setUrl(storeUrlPath);
