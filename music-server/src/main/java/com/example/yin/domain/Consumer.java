@@ -1,9 +1,7 @@
 package com.example.yin.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -39,7 +37,7 @@ public class Consumer implements Serializable {
     @TableField("phone_num")
     private String phoneNum;
 
-    @TableField("email")
+    @TableField(value = "email")
     private String email;
 
     @TableField("birth")
@@ -54,9 +52,9 @@ public class Consumer implements Serializable {
     @TableField("avator")
     private String avator;
 
-    @TableField("create_time")
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
-    @TableField("update_time")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 }
