@@ -1,5 +1,6 @@
 package com.example.yin.service;
 
+import com.example.yin.common.R;
 import com.example.yin.model.domain.Collect;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CollectService extends IService<Collect> {
 
+    R getCollectionOfUser(Integer userId);
+
+    R deleteCollection(Integer userId, Integer songId);
 }
