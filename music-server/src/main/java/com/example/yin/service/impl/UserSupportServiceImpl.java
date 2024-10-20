@@ -1,6 +1,6 @@
 package com.example.yin.service.impl;
 
-import com.example.yin.domain.UserSupport;
+import com.example.yin.model.domain.UserSupport;
 import com.example.yin.dao.UserSupportMapper;
 import com.example.yin.service.UserSupportService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

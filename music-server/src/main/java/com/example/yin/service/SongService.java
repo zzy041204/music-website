@@ -1,7 +1,7 @@
 package com.example.yin.service;
 
 import com.example.yin.common.R;
-import com.example.yin.domain.Song;
+import com.example.yin.model.domain.Song;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
 

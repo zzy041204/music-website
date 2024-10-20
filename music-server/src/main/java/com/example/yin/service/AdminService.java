@@ -1,6 +1,6 @@
 package com.example.yin.service;
 
-import com.example.yin.domain.Admin;
+import com.example.yin.model.domain.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

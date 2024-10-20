@@ -2,7 +2,7 @@ package com.example.yin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.yin.common.R;
-import com.example.yin.domain.Comment;
+import com.example.yin.model.domain.Comment;
 import com.example.yin.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

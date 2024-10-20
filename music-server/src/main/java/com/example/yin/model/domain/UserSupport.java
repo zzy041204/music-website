@@ -1,11 +1,10 @@
-package com.example.yin.domain;
+package com.example.yin.model.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,29 +18,17 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("singer")
-public class Singer implements Serializable {
+@TableName("user_support")
+public class UserSupport implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("name")
-    private String name;
+    @TableField("comment_id")
+    private Integer commentId;
 
-    @TableField("sex")
-    private Byte sex;
-
-    @TableField("pic")
-    private String pic;
-
-    @TableField("birth")
-    private LocalDateTime birth;
-
-    @TableField("location")
-    private String location;
-
-    @TableField("introduction")
-    private String introduction;
+    @TableField("user_id")
+    private String userId;
 }

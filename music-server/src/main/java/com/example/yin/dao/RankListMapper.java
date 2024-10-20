@@ -1,6 +1,6 @@
 package com.example.yin.dao;
 
-import com.example.yin.domain.RankList;
+import com.example.yin.model.domain.RankList;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

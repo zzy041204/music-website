@@ -1,6 +1,6 @@
 package com.example.yin.service.impl;
 
-import com.example.yin.domain.Collect;
+import com.example.yin.model.domain.Collect;
 import com.example.yin.dao.CollectMapper;
 import com.example.yin.service.CollectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

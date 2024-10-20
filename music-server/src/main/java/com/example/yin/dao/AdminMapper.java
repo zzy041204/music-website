@@ -1,6 +1,6 @@
 package com.example.yin.dao;
 
-import com.example.yin.domain.Admin;
+import com.example.yin.model.domain.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

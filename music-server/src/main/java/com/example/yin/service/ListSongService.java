@@ -1,7 +1,7 @@
 package com.example.yin.service;
 
 import com.example.yin.common.R;
-import com.example.yin.domain.ListSong;
+import com.example.yin.model.domain.ListSong;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

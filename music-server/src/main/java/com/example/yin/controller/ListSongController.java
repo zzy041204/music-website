@@ -2,7 +2,7 @@ package com.example.yin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.yin.common.R;
-import com.example.yin.domain.ListSong;
+import com.example.yin.model.domain.ListSong;
 import com.example.yin.service.ListSongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

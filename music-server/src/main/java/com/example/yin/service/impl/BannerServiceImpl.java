@@ -1,6 +1,6 @@
 package com.example.yin.service.impl;
 
-import com.example.yin.domain.Banner;
+import com.example.yin.model.domain.Banner;
 import com.example.yin.dao.BannerMapper;
 import com.example.yin.service.BannerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

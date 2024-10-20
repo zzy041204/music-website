@@ -2,9 +2,8 @@ package com.example.yin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.yin.common.R;
-import com.example.yin.domain.ListSong;
+import com.example.yin.model.domain.ListSong;
 import com.example.yin.dao.ListSongMapper;
-import com.example.yin.domain.Song;
 import com.example.yin.service.ListSongService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.yin.service.SongService;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>

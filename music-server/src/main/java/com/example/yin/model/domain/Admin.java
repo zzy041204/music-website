@@ -1,4 +1,4 @@
-package com.example.yin.domain;
+package com.example.yin.model.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -18,20 +18,17 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("rank_list")
-public class RankList implements Serializable {
+@TableName("admin")
+public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
-    @TableField("song_list_id")
-    private Long songListId;
+    @TableField("name")
+    private String name;
 
-    @TableField("consumer_id")
-    private Long consumerId;
-
-    @TableField("score")
-    private Integer score;
+    @TableField("password")
+    private String password;
 }

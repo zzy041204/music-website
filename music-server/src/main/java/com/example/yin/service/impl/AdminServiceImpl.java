@@ -1,6 +1,6 @@
 package com.example.yin.service.impl;
 
-import com.example.yin.domain.Admin;
+import com.example.yin.model.domain.Admin;
 import com.example.yin.dao.AdminMapper;
 import com.example.yin.service.AdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
